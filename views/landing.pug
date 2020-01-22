@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{subtitle}
+
+  form(action="/", method="POST")
+    input(name="lead_email" type="email", placeholder="Your email here for more recipes")
+    button(type="submit") Send me recipes 
