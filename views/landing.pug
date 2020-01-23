@@ -6,4 +6,8 @@ block content
 
   form(action="/", method="POST")
     input(name="lead_email" type="email", placeholder="Your email here for more recipes")
-    button(type="submit") Send me recipes 
+    button(type="submit") Send me recipes
+    if leads
+      h1 Leads
+        for lead in leads
+          p #{lead.email}
