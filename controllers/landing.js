@@ -9,8 +9,6 @@ exports.get_landing =  function(req, res, next) {
 }
 
 exports.get_lead =  function(req, res, next) {
-  console.log('--> Lead Email:', req.body.lead_email);
-  
   return models.Lead.create({
 		email: req.body.lead_email
 	}).then(lead => {
@@ -21,6 +19,15 @@ exports.get_lead =  function(req, res, next) {
 exports.show_leads =  function(req, res, next) {
   return models.Lead.findAll().then(leads => {
     res.render('landing', { title: 'Welcome to Express', leads: leads });
+  });
+}
+
+exports.show_lead = function (req, res, next) {
+  return models.Lead.findOne({
+    where : {
+      id : req.params.lead_id 
+    }
+  }).then(lead => {
+    res.render('lead', { lead:lead });
   })
-  
 }
