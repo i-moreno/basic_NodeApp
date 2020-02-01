@@ -1,20 +1,31 @@
-extends layout
+doctype html
+html(lang="en")
 
-block content
-  h1= title
-  p Welcome to #{subtitle}
-  form(action="/", method="POST")
-    input(name="lead_email" type="email", placeholder="Your email here for more recipes")
-    button(type="submit") Send me recipes
+  include common/header.pug
+  +head("MVP")
+
+  body
+    h1= title
+    p Welcome to #{subtitle}
     
-  if leads
-    h1 Leads
-    for lead in leads
-      p(id=lead.id)
-        span #{lead.email}
-        |
-        a(href="/lead/" + lead.id) Details
-        |
-        button(onclick=`deleteLead('${lead.id}')`) Delete
-  script(src='https://code.jquery.com/jquery-3.2.1.min.js')
-  script(src='/javascripts/leads.js')
+    form(action="/", method="POST")
+      input(name="lead_email" type="email", placeholder="Your email here for more recipes")
+      button(type="submit") Send me recipes
+
+    if leads
+      h1 Leads
+      for lead in leads
+        p(id=lead.id)
+          span #{lead.email}
+          |
+          a(href="/lead/" + lead.id) Details
+          |
+          button(onclick=`deleteLead('${lead.id}')`) Delete
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    
+    a(href="/leads") Subscribers
+
+    include common/footer.pug
+    +footer()
+
+    script(src='/javascripts/leads.js')
