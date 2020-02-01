@@ -1,6 +1,21 @@
-extends ../layout
+doctype html
+html(lang="en")
 
-block content
-  form(action="/lead/" + lead.id +"/edit", method="POST")
-    input(name="lead_email" type="email", placeholder="Your email here for more recipes" value=lead.email)
-    button(type="submit") Update Lead
+  include ../common/header.pug
+  +head("MVP")
+
+  body 
+    header
+      include ../common/navbar.pug
+      +navbar()
+        
+      .container
+        .row.justify-content-md-center
+          .col-md-8 
+            form.form-inline(action="/lead/" + lead.id +"/edit", method="POST")              
+              .form-group.mx-sm-3.mb-2
+                input.form-control(name="lead_email" type="email", placeholder="Your email here for more recipes" value=lead.email)
+              button.btn.btn-primary(type="submit") Update Lead
+
+    include ../common/footer.pug
+    +footer()

@@ -28,6 +28,8 @@ exports.show_lead = function (req, res, next) {
       id : req.params.lead_id 
     }
   }).then(lead => {
+    console.log('*****lead*****', lead);
+    
     res.render('lead', { lead:lead });
   });
 }
