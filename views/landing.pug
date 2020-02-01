@@ -5,25 +5,40 @@ html(lang="en")
   +head("MVP")
 
   body
-    h1= title
-    p Welcome to #{subtitle}
-    
-    form(action="/", method="POST")
-      input(name="lead_email" type="email", placeholder="Your email here for more recipes")
-      button(type="submit") Send me recipes
+    header
+      include common/navbar.pug
+      +navbar()
 
-    if leads
-      h1 Leads
-      for lead in leads
-        p(id=lead.id)
-          span #{lead.email}
-          |
-          a(href="/lead/" + lead.id) Details
-          |
-          button(onclick=`deleteLead('${lead.id}')`) Delete
-    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
-    
-    a(href="/leads") Subscribers
+    .container
+      .row  
+        .col-md-12
+          .jumbotron
+            h1.display-4 #{title}
+            p.lead Welcome to #{subtitle} | Made with Pug & Node
+            hr.my-4
+            form.form-inline(action="/", method="POST")
+              .form-group.mx-sm-3.mb-2
+                label.sr-only(for='inputPassword2') Email
+                input#inputPassword2.form-control(name="lead_email" type="email", placeholder="Your email here for more recipes")
+              button.btn.btn-primary.mb-2(type='submit') I'm in        
+
+      if leads
+        table.table
+          thead.thead-dark
+            tr
+              th(scope='col') Email
+              th(scope='col') Actions          
+          tbody            
+          for lead in leads
+              tr(id=lead.id)            
+                td #{lead.email}
+                td
+                  a(href="/lead/" + lead.id)(style='margin-right:.5rem;') Details
+                  button.btn.btn-danger(onclick=`deleteLead('${lead.id}')`) Delete
+
+      a(href="/leads") Subscribers
+
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')    
 
     include common/footer.pug
     +footer()
